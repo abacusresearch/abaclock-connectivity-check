@@ -8,15 +8,20 @@ import (
 )
 
 func check(response http.ResponseWriter, request *http.Request) {
-    for _, device := range request.URL.Query()["device"] {
-        attributes, err := json.Marshal(map[string]string {"device": device})
+    query := request.URL.Query()
 
-        if err != nil {
-            panic(err)
-        }
-
-        fmt.Println(string(attributes))
+    resultMap := map[string]string {
+        "deviceId": query["deviceId"][0],
+        "deviceLabel": query["deviceLabel"][0],
     }
+
+    resultString, err := json.Marshal(resultMap)
+
+    if err != nil {
+        panic(err)
+    }
+
+    fmt.Println(string(resultString))
 
     response.WriteHeader(204)
 }
