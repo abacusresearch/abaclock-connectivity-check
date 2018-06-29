@@ -10,9 +10,18 @@ import (
 func check(response http.ResponseWriter, request *http.Request) {
     query := request.URL.Query()
 
-    resultMap := map[string]string {
-        "deviceId": query["deviceId"][0],
-        "deviceLabel": query["deviceLabel"][0],
+    attributes := []string {
+        "accountId",
+        "deviceId",
+        "deviceLabel",
+    }
+
+    resultMap := map[string]string {}
+
+    for _, attribute := range attributes {
+        if query[attribute] != nil {
+            resultMap[attribute] = query[attribute][0]
+        }
     }
 
     resultString, err := json.Marshal(resultMap)
