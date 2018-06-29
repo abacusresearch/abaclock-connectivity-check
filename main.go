@@ -14,6 +14,8 @@ func check(response http.ResponseWriter, request *http.Request) {
         "accountId",
         "deviceId",
         "deviceLabel",
+        "replicationStatusPull",
+        "replicationStatusPush",
     }
 
     resultMap := map[string]string {}
